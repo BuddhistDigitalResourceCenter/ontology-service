@@ -1,4 +1,4 @@
-package io.bdrc.ontology.service.api;
+package io.bdrc.ontology.service.core;
 
 /*******************************************************************************
  * Copyright (c) 2017 Buddhist Digital Resource Center (BDRC)

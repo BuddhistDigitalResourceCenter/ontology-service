@@ -1,4 +1,4 @@
-package io.bdrc.ontology.service;
+package io.bdrc.ontology.service.resources;
 
 /*******************************************************************************
  * Copyright (c) 2017 Buddhist Digital Resource Center (BDRC)
@@ -19,40 +19,40 @@ package io.bdrc.ontology.service;
  * limitations under the License.
  ******************************************************************************/
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.bdrc.ontology.service.core.Ontology;
 import io.bdrc.ontology.service.core.OntologyTop;
-import io.bdrc.ontology.service.resources.OntologyResource;
-import io.dropwizard.Application;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
-import io.dropwizard.views.ViewBundle;
+import io.bdrc.ontology.service.views.OntoTopView;
 
-public class OntologyServiceApplication extends Application<OntologyServiceConfiguration> {
-
+@Path("/ontology")
+@Produces(MediaType.APPLICATION_JSON)
+public class OntologyResource {
+    
     Logger log;
     
-    public static void main(final String[] args) throws Exception {
-        new OntologyServiceApplication().run(args);
-    }
-
-    @Override
-    public String getName() {
-        return "BDRC Ontology Service";
-    }
-
-    @Override
-    public void initialize(final Bootstrap<OntologyServiceConfiguration> bootstrap) {
+    OntologyTop ontology;
+    
+    public OntologyResource(OntologyTop top) {
         log = LoggerFactory.getLogger(this.getClass());
-        bootstrap.addBundle(new ViewBundle<OntologyServiceConfiguration>());
+        this.ontology = top;
     }
 
-    @Override
-    public void run(final OntologyServiceConfiguration config, final Environment env) {
-        Ontology.init(config);
-        env.jersey().register(new OntologyResource(new OntologyTop()));
+    @GET
+    public OntologyTop getOntology() {
+        log.info("getOntology called");
+        return ontology;
     }
 
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public OntoTopView getOntologyView() {
+        log.info("getOntologyView called");
+        return new OntoTopView(ontology);
+    }
 }
