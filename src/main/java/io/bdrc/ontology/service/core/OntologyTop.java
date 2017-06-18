@@ -6,7 +6,7 @@ public class OntologyTop {
 
     @JsonProperty
     public String getName() {
-        return Ontology.MODEL.getProfile().getLabel();
+        return Ontology.MODEL.listOntologies().toList().get(0).getLabel(null);
     }
     
     @JsonProperty
