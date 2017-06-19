@@ -20,45 +20,39 @@ package io.bdrc.ontology.service.resources;
  ******************************************************************************/
 
 import javax.ws.rs.GET;
+
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.bdrc.ontology.service.core.OntologyTop;
+import io.bdrc.ontology.service.core.OntologyClassModel;
+import io.bdrc.ontology.service.views.OntoClassView;
 import io.bdrc.ontology.service.views.OntoTopView;
 
-/**
- * Returns general (top-level) information about the ontology
- * 
- * @author chris
- *
- */
-@Path("/ontology")
+@Path("/ontology/class/{classUri: .+}")
 @Produces(MediaType.APPLICATION_JSON)
-public class OntologyResource {
+public class OntologyClassResource {
     
     Logger log;
-    
-    OntologyTop top;
-    
-    public OntologyResource() {
+
+    public OntologyClassResource() {
         log = LoggerFactory.getLogger(this.getClass());
-        this.top = new OntologyTop();
     }
 
     @GET
-    public OntologyTop getOntology() {
-        log.info("getOntology called");
-        return top;
+    public OntologyClassModel getOntologyClass(@PathParam("classUri") String uri) {
+        log.info("getOntologyClass called with " + uri);
+        return new OntologyClassModel(uri);
     }
 
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public OntoTopView getOntologyView() {
-        log.info("getOntologyView called");
-        return new OntoTopView(top);
+    public OntoClassView getOntologyClassView(@PathParam("classUri") String uri) {
+        log.info("getOntologyClassView called with " + uri);
+        return new OntoClassView(uri);
     }
 }

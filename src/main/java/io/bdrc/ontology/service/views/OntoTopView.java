@@ -1,7 +1,5 @@
 package io.bdrc.ontology.service.views;
 
-import io.bdrc.ontology.service.core.OntologyTop;
-
 /*******************************************************************************
  * Copyright (c) 2017 Buddhist Digital Resource Center (BDRC)
  * 
@@ -21,6 +19,7 @@ import io.bdrc.ontology.service.core.OntologyTop;
  * limitations under the License.
  ******************************************************************************/
 
+import io.bdrc.ontology.service.core.OntologyTop;
 import io.dropwizard.views.View;
 
 public class OntoTopView extends View {

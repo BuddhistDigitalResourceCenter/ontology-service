@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.bdrc.ontology.service.core.Ontology;
-import io.bdrc.ontology.service.core.OntologyTop;
+import io.bdrc.ontology.service.resources.OntologyClassResource;
 import io.bdrc.ontology.service.resources.OntologyResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -52,7 +52,8 @@ public class OntologyServiceApplication extends Application<OntologyServiceConfi
     @Override
     public void run(final OntologyServiceConfiguration config, final Environment env) {
         Ontology.init(config);
-        env.jersey().register(new OntologyResource(new OntologyTop()));
+        env.jersey().register(new OntologyResource());
+        env.jersey().register(new OntologyClassResource());
     }
 
 }

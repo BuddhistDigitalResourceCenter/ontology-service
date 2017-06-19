@@ -18,6 +18,7 @@ public class Ontology {
         Logger log = LoggerFactory.getLogger(Ontology.class);
         
         OntModel ontModel = null;
+        CONFIG = config;
         
         try {
             InputStream stream = HttpFile.stream(config.getOwlURL());
@@ -41,4 +42,5 @@ public class Ontology {
     }
     
     public static OntModel MODEL;
+    public static OntologyServiceConfiguration CONFIG;
 }
