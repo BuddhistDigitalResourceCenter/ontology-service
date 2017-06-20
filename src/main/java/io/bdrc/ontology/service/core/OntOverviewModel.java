@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.jena.ontology.OntClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 
@@ -33,69 +35,65 @@ import com.fasterxml.jackson.annotation.JsonGetter;
  * @author chris
  *
  */
-public class OntologyTop {
+public class OntOverviewModel {
+    Logger log = LoggerFactory.getLogger(this.getClass());
 
     @JsonGetter("name")
     public String getName() {
-        return Ontology.MODEL.listOntologies().toList().get(0).getLabel(null);
+        return OntAccess.MODEL.listOntologies().toList().get(0).getLabel(null);
+    }
+
+    @JsonGetter("numPrefixes")
+    public int getNumPrefixes() {
+        return OntAccess.MODEL.numPrefixes();
     }
 
     @JsonGetter("numOntologies")
     public int getNumOntologies() {
-        return Ontology.MODEL.listOntologies().toList().size();
+        return OntAccess.MODEL.listOntologies().toList().size();
     }
     
     @JsonGetter
     public String getRootURL() {
-        return Ontology.CONFIG.getOwlURL();
+        return OntAccess.CONFIG.getOwlURL();
     }
     
     @JsonGetter
     public int getNumClasses() {
-        return Ontology.MODEL.listClasses().toList().size();
+        return OntAccess.MODEL.listClasses().toList().size();
     }
     
     @JsonGetter
     public int getNumAnnotationProperties() {
-        return Ontology.MODEL.listAnnotationProperties().toList().size();
+        return OntAccess.MODEL.listAnnotationProperties().toList().size();
     }
     
     @JsonGetter
     public int getNumObjectProperties() {
-        return Ontology.MODEL.listObjectProperties().toList().size();
+        return OntAccess.MODEL.listObjectProperties().toList().size();
     }
     
     @JsonGetter
     public int getNumDatatypeProperties() {
-        return Ontology.MODEL.listDatatypeProperties().toList().size();
+        return OntAccess.MODEL.listDatatypeProperties().toList().size();
     }
     
     @JsonGetter
     public int getNumRootClasses() {
-        return Ontology.MODEL.listHierarchyRootClasses().toList().size();
+        return OntAccess.getSimpleRootClasses().size();
     }
     
     @JsonGetter
-    public int getNumBlankRootClasses() {
-        int blanks = 0;
-        List<OntClass> classes = Ontology.MODEL.listHierarchyRootClasses().toList();
-        for (OntClass oc : classes) {
-            String id = oc.getURI();
-            if (id == null) {
-                blanks++;
-            }
-        }
-        return blanks;
-    }
-    
-    @JsonGetter
-    public List<String> getRootClasses() {
-        List<OntClass> classes = Ontology.MODEL.listHierarchyRootClasses().toList();
-        List<String> classNames = new ArrayList<String>();
-        for (OntClass oc : classes) {
-            String id = oc.getURI();
-            if (id != null) {
-                classNames.add(id);
+    public List<List<String>> getRootClasses() {
+        List<OntClass> roots = OntAccess.getSimpleRootClasses();
+        List<List<String>> classNames = new ArrayList<List<String>>();
+        for (OntClass oc : roots) {
+            List<String> clazzIds = new ArrayList<String>();
+            String uri = oc.getURI();
+            if (uri != null) {
+                clazzIds.add(uri);
+                clazzIds.add(OntAccess.MODEL.shortForm(uri));
+                classNames.add(clazzIds);
             }
         }
         

@@ -19,19 +19,19 @@ package io.bdrc.ontology.service.views;
  * limitations under the License.
  ******************************************************************************/
 
-import io.bdrc.ontology.service.core.OntologyTop;
+import io.bdrc.ontology.service.core.OntOverviewModel;
 import io.dropwizard.views.View;
 
-public class OntoTopView extends View {
+public class OntOverviewView extends View {
 
-    private OntologyTop top;
+    private OntOverviewModel top;
     
-    public OntoTopView(OntologyTop top) {
-        super("/assets/ontoTop.ftl");
+    public OntOverviewView(OntOverviewModel top) {
+        super("/assets/ontOverview.ftl");
         this.top = top;
     }
 
-    public OntologyTop getOntology() {
+    public OntOverviewModel getOntology() {
         return top;
     }
 }

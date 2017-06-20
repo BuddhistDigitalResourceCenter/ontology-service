@@ -27,8 +27,8 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.bdrc.ontology.service.core.OntologyTop;
-import io.bdrc.ontology.service.views.OntoTopView;
+import io.bdrc.ontology.service.core.OntOverviewModel;
+import io.bdrc.ontology.service.views.OntOverviewView;
 
 /**
  * Returns general (top-level) information about the ontology
@@ -42,23 +42,23 @@ public class OntologyResource {
     
     Logger log;
     
-    OntologyTop top;
+    OntOverviewModel top;
     
     public OntologyResource() {
         log = LoggerFactory.getLogger(this.getClass());
-        this.top = new OntologyTop();
+        this.top = new OntOverviewModel();
     }
 
     @GET
-    public OntologyTop getOntology() {
+    public OntOverviewModel getOntology() {
         log.info("getOntology called");
         return top;
     }
 
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public OntoTopView getOntologyView() {
+    public OntOverviewView getOntologyView() {
         log.info("getOntologyView called");
-        return new OntoTopView(top);
+        return new OntOverviewView(top);
     }
 }

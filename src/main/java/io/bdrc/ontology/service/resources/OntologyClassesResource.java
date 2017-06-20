@@ -29,30 +29,30 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.bdrc.ontology.service.core.OntologyClassModel;
-import io.bdrc.ontology.service.views.OntoClassView;
-import io.bdrc.ontology.service.views.OntoTopView;
+import io.bdrc.ontology.service.core.OntClassModel;
+import io.bdrc.ontology.service.views.OntClassView;
+import io.bdrc.ontology.service.views.OntOverviewView;
 
-@Path("/ontology/class/{classUri: .+}")
+@Path("/ontology/classes/{classUri: .+}")
 @Produces(MediaType.APPLICATION_JSON)
-public class OntologyClassResource {
+public class OntologyClassesResource {
     
     Logger log;
 
-    public OntologyClassResource() {
+    public OntologyClassesResource() {
         log = LoggerFactory.getLogger(this.getClass());
     }
 
     @GET
-    public OntologyClassModel getOntologyClass(@PathParam("classUri") String uri) {
+    public OntClassModel getOntologyClass(@PathParam("classUri") String uri) {
         log.info("getOntologyClass called with " + uri);
-        return new OntologyClassModel(uri);
+        return new OntClassModel(uri);
     }
 
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public OntoClassView getOntologyClassView(@PathParam("classUri") String uri) {
+    public OntClassView getOntologyClassView(@PathParam("classUri") String uri) {
         log.info("getOntologyClassView called with " + uri);
-        return new OntoClassView(uri);
+        return new OntClassView(uri);
     }
 }
