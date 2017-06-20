@@ -83,17 +83,15 @@ public class OntOverviewModel {
         return OntAccess.getSimpleRootClasses().size();
     }
     
-    @JsonGetter
+    @JsonGetter("rootClasses")
     public List<List<String>> getRootClasses() {
         List<OntClass> roots = OntAccess.getSimpleRootClasses();
         List<List<String>> classNames = new ArrayList<List<String>>();
         for (OntClass oc : roots) {
-            List<String> clazzIds = new ArrayList<String>();
             String uri = oc.getURI();
+            
             if (uri != null) {
-                clazzIds.add(uri);
-                clazzIds.add(OntAccess.MODEL.shortForm(uri));
-                classNames.add(clazzIds);
+                classNames.add(OntAccess.getIds(uri));
             }
         }
         

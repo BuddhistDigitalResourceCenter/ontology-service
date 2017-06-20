@@ -37,7 +37,7 @@ import io.bdrc.ontology.service.views.OntOverviewView;
 @Produces(MediaType.APPLICATION_JSON)
 public class OntologyClassesResource {
     
-    Logger log;
+    static Logger log = LoggerFactory.getLogger(OntologyClassesResource.class);
 
     public OntologyClassesResource() {
         log = LoggerFactory.getLogger(this.getClass());

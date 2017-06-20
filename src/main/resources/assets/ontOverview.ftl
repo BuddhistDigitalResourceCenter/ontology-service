@@ -6,7 +6,7 @@
     </head>
     <body>
     	<#setting url_escaping_charset="UTF-8">
-        <!-- calls getOntology()... in OntoTopView -->
+        <!-- calls getOntology()... in OntOverviewView -->
         <h3>Ontology: ${ontology.name?html}</h3>
         <p>Retrieved from <a href="${ontology.rootURL}">${ontology.rootURL?html}</a></p>
         <p>Defines ${ontology.numPrefixes} prefixes,
