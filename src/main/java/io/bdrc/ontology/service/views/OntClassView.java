@@ -16,12 +16,10 @@ public class OntClassView extends View {
     public OntClassView(String uri) {
         super("/assets/ontClass.ftl");
         model = new OntClassModel(uri);
-        log.info(">>>> new OntClassView( " + uri + " )");
     }
 
     @JsonGetter("model")
     public OntClassModel getModel() {
-        log.info(">>>>>>>> new OntClassView.getModel()");
         return model;
     }
 }

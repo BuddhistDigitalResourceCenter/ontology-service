@@ -84,17 +84,14 @@ public class OntOverviewModel {
     }
     
     @JsonGetter("rootClasses")
-    public List<List<String>> getRootClasses() {
+    public List<OntClassModel> getRootClasses() {
         List<OntClass> roots = OntAccess.getSimpleRootClasses();
-        List<List<String>> classNames = new ArrayList<List<String>>();
-        for (OntClass oc : roots) {
-            String uri = oc.getURI();
-            
-            if (uri != null) {
-                classNames.add(OntAccess.getIds(uri));
-            }
+        List<OntClassModel> models = new ArrayList<OntClassModel>();
+       
+        for (OntClass root : roots) {
+            models.add(new OntClassModel(root));
         }
         
-        return classNames;
+        return models;
     }
 }

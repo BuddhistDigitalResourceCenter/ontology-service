@@ -24,23 +24,21 @@ public class OntClassModel {
     public OntClassModel(String uri) {
         this.uri = uri;
         clazz = OntAccess.MODEL.getOntClass(uri);
-        log.info("#### new OntClassModel( " + uri + " )");
     }
     
     public OntClassModel(OntClass c) {
-        this.uri = c.getURI();;
+        this.uri = c.getURI();
         clazz = c;
+   }
+
+    @JsonGetter("uri")
+    public String getUri() {
+        return uri;
     }
 
     @JsonGetter("id")
     public String getId() {
-        log.info("######## OntClassModel.getId()");
         return OntAccess.MODEL.shortForm(uri);
-    }
-
-    @JsonGetter("ids")
-    public List<String> getIds() {
-        return OntAccess.getIds(uri);
     }
     
     @JsonGetter("subclasses")

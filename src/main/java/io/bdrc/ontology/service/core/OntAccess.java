@@ -8,7 +8,6 @@ import java.util.List;
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
-import org.apache.jena.ontology.OntResource;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.slf4j.Logger;
@@ -97,14 +96,5 @@ public class OntAccess {
         }
         
         return rez;
-    }
-
-    public static List<String> getIds(String uri) {
-        List<String> ids = new ArrayList<String>();
-        
-        ids.add(uri);
-        ids.add(OntAccess.MODEL.shortForm(uri));
-
-        return ids;
     }
 }

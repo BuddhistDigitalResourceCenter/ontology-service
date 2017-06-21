@@ -2,16 +2,16 @@
 <html>
     <head>
       <#-- link rel="stylesheet" href="/assets/pure-min.css" -->
-	  <title>Ontology Class</title>
+	  <title>Ontology Class - ${model.id}</title>
     </head>
     <body>
     	<#setting url_escaping_charset="UTF-8">
         <!-- calls getModel()... in OntClassView -->
-        <h3>${model.id}</h3>
+        <h3>Ontology Class - ${model.id}</h3>
     	<p>subclasses:</p>
         <ul>
-          <#list model.subclasses as ids >
-            <li><a href="/ontology/classes/${ids[0]?url}">${ids[1]}</a></li>
+          <#list model.subclasses as sub >
+            <li><a href="/ontology/classes/${sub.uri?url}">${sub.id}</a></li>
           </#list>
         </ul>
 	</body>
