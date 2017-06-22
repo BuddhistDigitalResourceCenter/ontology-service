@@ -1,8 +1,9 @@
 <#-- @ftlvariable name="" type="io.bdrc.ontology.service.views.OntOverviewView" -->
 <html>
     <head>
-      <#-- link rel="stylesheet" href="/assets/pure-min.css" -->
 	  <title>Ontology - ${ontology.name?html}</title>
+      <#-- link rel="stylesheet" href="/assets/pure-min.css" -->
+	  <meta charset="UTF-8">
     </head>
     <body>
     	<#setting url_escaping_charset="UTF-8">

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.jena.ontology.OntClass;
+import org.apache.jena.rdf.model.RDFNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,5 +52,27 @@ public class OntClassModel {
         }
         
         return models;
+    }
+    
+    @JsonGetter("labels")
+    public List<String> getLabels() {
+        List<String> labels = new ArrayList<String>();
+        
+        for (RDFNode node : clazz.listLabels(null).toList()) {
+            labels.add(node.toString());
+        }
+        
+        return labels;
+    }
+    
+    @JsonGetter("comments")
+    public List<String> getComments() {
+        List<String> comments = new ArrayList<String>();
+        
+        for (RDFNode node : clazz.listComments(null).toList()) {
+            comments.add(node.toString());
+        }
+        
+        return comments;
     }
 }
