@@ -10,9 +10,14 @@
     	<#setting url_escaping_charset="UTF-8">
         <!-- calls getModel()... in OntClassView -->
         <h3>Ontology Class - ${model.id}</h3>
-        <h4>Labels: </h4><p><#list model.labels as label>${label}<#sep>,<br/></#list></p>
+        <h4>Labels: </h4><p><#list model.labels as label>${label}<#sep>,<br/><#else><p>No labels found.</#list></p>
         <h4>Comments:</h4>
-        <#list model.comments as comment><p>${comment}</p></#list></p>
+        <#list model.comments as comment><p>${comment}</p><#else><p>No comments found.</#list></p>
+        <#list model.otherProperties>
+            <h4>Other Properties:</h4>
+            <#items as property><p>${property.propertyId} ${property.object}</p></#items>
+          <#else><p>No properties found.</p>
+        </#list>
         <#list model.subclasses>
     	<h4>Subclasses:</h4>
         <ul>

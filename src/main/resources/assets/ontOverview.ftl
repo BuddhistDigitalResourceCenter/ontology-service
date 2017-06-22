@@ -1,3 +1,4 @@
+<#ftl encoding="utf-8">
 <#-- @ftlvariable name="" type="io.bdrc.ontology.service.views.OntOverviewView" -->
 <html>
     <head>

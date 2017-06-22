@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.jena.ontology.OntClass;
 import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -74,5 +75,30 @@ public class OntClassModel {
         }
         
         return comments;
+    }
+    
+    @JsonGetter("properties")
+    public List<StmtModel> getProperties() {
+        List<StmtModel> properties = new ArrayList<StmtModel>();
+        
+        for (Statement stmt : clazz.listProperties().toList()) {
+            properties.add(new StmtModel(stmt));
+        }
+        
+        return properties;
+    }
+    
+    @JsonGetter("otherProperties")
+    public List<StmtModel> getOtherProperties() {
+        List<StmtModel> properties = new ArrayList<StmtModel>();
+        
+        for (Statement stmt : clazz.listProperties().toList()) {
+            String local = stmt.getPredicate().getLocalName();
+            if (!local.equals("label") && !local.equals("comment")) {
+              properties.add(new StmtModel(stmt));
+            }
+        }
+        
+        return properties;
     }
 }
