@@ -1,5 +1,14 @@
 owlURL: https://raw.githubusercontent.com/BuddhistDigitalResourceCenter/owl-schema/master/bdrc.owl
 
+server:
+  applicationContextPath: /
+  applicationConnectors:
+    - type: http
+      port: 18080
+  adminConnectors:
+    - type: http
+      port: 18081
+
 logging:
   level: INFO
   loggers:
