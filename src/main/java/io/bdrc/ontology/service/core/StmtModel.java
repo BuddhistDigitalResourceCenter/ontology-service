@@ -42,4 +42,20 @@ public class StmtModel {
             return obj.toString();
         }
     }
+    
+    @JsonGetter("objectUri")
+    public String getObjectUri() {
+        RDFNode obj = stmt.getObject();
+        if (obj.isURIResource()) {
+            return obj.asResource().getURI();
+        } else {
+            return "";
+        }
+    }
+    
+    @JsonGetter("objectHasUri")
+    public boolean objectHasUri() {
+        RDFNode obj = stmt.getObject();
+        return obj.isURIResource();
+    }
 }

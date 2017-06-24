@@ -26,12 +26,21 @@ public class OntClassModel {
     public OntClassModel(String uri) {
         this.uri = uri;
         clazz = OntAccess.MODEL.getOntClass(uri);
+        if (clazz == null) {
+            log.info("***********>>  OntClassModel( " + uri + " )");
+            clazz = OntClassNotPresent.INSTANCE;
+        }
     }
     
     public OntClassModel(OntClass c) {
         this.uri = c.getURI();
         clazz = c;
    }
+    
+    @JsonGetter("isPresent")
+    public boolean isPresent() {
+        return !(OntClassNotPresent.class.equals(clazz.getClass()));
+    }
 
     @JsonGetter("uri")
     public String getUri() {
@@ -41,6 +50,20 @@ public class OntClassModel {
     @JsonGetter("id")
     public String getId() {
         return OntAccess.MODEL.shortForm(uri);
+    }
+    
+    @JsonGetter("hasParent")
+    public boolean hasParent() {
+        return clazz.getSuperClass() != null;
+    }
+    @JsonGetter("parent")
+    public OntClassModel getParent() {
+        OntClass sup3r = clazz.getSuperClass();
+        if (sup3r != null) {
+            return new OntClassModel(sup3r);
+        } else {
+            return null;
+        }
     }
     
     @JsonGetter("subclasses")
